@@ -23,6 +23,8 @@ const App = () => {
       //render the todo into the list
       const newItem = { id: new Date().getTime().toString(), title: todo };
       setList([...list, newItem]);
+      setTodo("");
+      showAlert(true, "Item added to the list", "success");
     }
   };
 
@@ -31,7 +33,18 @@ const App = () => {
   };
 
   const removeAlert = () => {
-    setAlert({ show: false, msg: "", type: "" });
+    showAlert("", "");
+  };
+
+  const clearList = () => {
+    showAlert(true, "All items removed", "danger");
+    setList([]);
+  };
+
+  const removeTodo = (id) => {
+    const newList = list.filter((item) => item.id !== id);
+    setList(newList);
+    showAlert(true, "Item removed", "danger");
   };
 
   return (
@@ -52,7 +65,7 @@ const App = () => {
           </div>
         </form>
 
-        <List list={list} />
+        <List list={list} clearList={clearList} removeTodo={removeTodo} />
       </section>
     </div>
   );

@@ -1,10 +1,11 @@
 .section {
   min-width: 400px;
-  max-width: 600px;
+  /* width: 100%; */
+  /* max-width: 600px; */
   box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
-  min-height: 400px;
+  min-height: 400px !important;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   /* justify-content: center; */
   flex-direction: column;
   border-radius: 10px;
@@ -46,6 +47,7 @@
   border: none;
   background-color: rgba(0, 255, 255, 0.89);
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .field-container {
@@ -69,9 +71,17 @@
 }
 
 .todo {
-  margin-right: auto;
+  /* text-align: left; */
 }
 
 .btn-container {
   width: 40px;
+}
+
+.margin-top {
+  margin-top: 20px;
+}
+
+.align-center {
+  text-align: center;
 }
