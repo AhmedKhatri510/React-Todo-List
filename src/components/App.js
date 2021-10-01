@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./App.css";
 
 import Alert from "./Alert";
 import List from "./List";
 
+const getLocaleStorage = () => {
+  const list = localStorage.getItem("list");
+
+  if (!list) return [];
+  return JSON.parse(list);
+};
+
 const App = () => {
   const [todo, setTodo] = useState("");
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(getLocaleStorage);
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState("");
 
@@ -71,6 +78,10 @@ const App = () => {
     // console.log(specificItem);
     setTodo(specificItem.title);
   };
+
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(list));
+  }, [list]);
 
   return (
     <div className="container">
