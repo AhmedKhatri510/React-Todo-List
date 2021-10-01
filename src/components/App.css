@@ -76,6 +76,8 @@
 
 .btn-container {
   width: 40px;
+  display: flex;
+  gap: 2rem;
 }
 
 .margin-top {
@@ -84,4 +86,15 @@
 
 .align-center {
   text-align: center;
+}
+
+.icons {
+  height: 1.8rem;
+  width: 1.8rem;
+  border: none;
+  cursor: pointer;
+}
+
+.icons .icon:hover {
+  filter: brightness(150%);
 }

@@ -10,16 +10,22 @@ const List = ({ list, clearList, removeTodo, editTodo }) => {
       <div className="list-container" key={item.id}>
         <h4 className="todo">{item.title}</h4>
         <div className="btn-container ">
-          <FaEdit
-            style={{ color: "green" }}
-            onClick={() => editTodo(item.id)}
-          />
-          <FaTrash
-            style={{
-              color: "red",
-            }}
-            onClick={() => removeTodo(item.id)}
-          />
+          <button className="icons">
+            <FaEdit
+              className="icon"
+              style={{ color: "green" }}
+              onClick={() => editTodo(item.id)}
+            />
+          </button>
+          <button className="icons">
+            <FaTrash
+              className="icon"
+              style={{
+                color: "red",
+              }}
+              onClick={() => removeTodo(item.id)}
+            />
+          </button>
         </div>
       </div>
     );
