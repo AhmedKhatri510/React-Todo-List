@@ -1,7 +1,8 @@
 import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
-const List = ({ list, clearList, removeTodo }) => {
+const List = ({ list, clearList, removeTodo, editTodo }) => {
+  console.log(editTodo);
   if (!list.length) return null;
 
   const renderedList = list.map((item) => {
@@ -9,7 +10,10 @@ const List = ({ list, clearList, removeTodo }) => {
       <div className="list-container" key={item.id}>
         <h4 className="todo">{item.title}</h4>
         <div className="btn-container ">
-          <FaEdit style={{ color: "green" }} />
+          <FaEdit
+            style={{ color: "green" }}
+            onClick={() => editTodo(item.id)}
+          />
           <FaTrash
             style={{
               color: "red",

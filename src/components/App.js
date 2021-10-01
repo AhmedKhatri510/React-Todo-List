@@ -9,7 +9,8 @@ const App = () => {
   const [todo, setTodo] = useState("");
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
   const [list, setList] = useState([]);
-  const [isEditing, setEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editID, setEditID] = useState("");
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -19,6 +20,19 @@ const App = () => {
       showAlert(true, "Please enter some text", "danger");
     } else if (todo && isEditing) {
       //dealing with editing
+      const updatedList = list.map((item) => {
+        if (item.id === editID) {
+          return { id: item.id, title: todo };
+        }
+
+        return item;
+      });
+
+      setList(updatedList);
+      setIsEditing(false);
+      setEditID(false);
+      setTodo("");
+      showAlert(true, "todo changed", "success");
     } else {
       //render the todo into the list
       const newItem = { id: new Date().getTime().toString(), title: todo };
@@ -39,12 +53,23 @@ const App = () => {
   const clearList = () => {
     showAlert(true, "All items removed", "danger");
     setList([]);
+    setIsEditing(false);
+    setTodo("");
   };
 
   const removeTodo = (id) => {
     const newList = list.filter((item) => item.id !== id);
     setList(newList);
     showAlert(true, "Item removed", "danger");
+  };
+
+  const editItem = (id) => {
+    // console.log(id);
+    setIsEditing(true);
+    setEditID(id);
+    const [specificItem] = list.filter((item) => id === item.id);
+    // console.log(specificItem);
+    setTodo(specificItem.title);
   };
 
   return (
@@ -65,7 +90,12 @@ const App = () => {
           </div>
         </form>
 
-        <List list={list} clearList={clearList} removeTodo={removeTodo} />
+        <List
+          list={list}
+          clearList={clearList}
+          removeTodo={removeTodo}
+          editTodo={editItem}
+        />
       </section>
     </div>
   );
